@@ -42,10 +42,10 @@ int main(){
     double w =10.0;
     double b = 5.0; 
 
-    double eps = 1e-3;    
-    double rate = 1e-3;
+    double eps = 1e-1;    
+    double rate = 1e-1;
 
-    for (int i=0;i<1000;++i){
+    for (int i=0;i<100000;++i){
         double dw = (cost(w+eps,b) - cost(w,b))/eps;
         double db = (cost(w,b+eps) - cost(w,b))/eps;
         w-=rate*dw;
