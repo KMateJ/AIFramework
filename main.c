@@ -10,6 +10,7 @@ double Train[][2]={
     {3,6},
     {4,8},
     {5,10},
+    {6,12},
 };
 
 #define train_count (int)(sizeof(Train)/sizeof(Train[0]))
@@ -31,12 +32,26 @@ double cost( double w){
     return res/train_count;
 }
 
+
 int main(){
     srand(40);
 
-    double w = rand_float()*100;
+    //double w = rand_float()*100;
 
-    printf ("cost: %f", cost(w));
+    double w =20;
+
+    double eps = 1e-3;    
+    double rate = 1e-2;
+
+    for (int i=0;i<20;++i){
+        double dcost = (cost(w+eps) - cost(w))/eps;
+
+        printf ("before cost: %f, w: %f\n", cost(w),w);
+
+        w-=rate*dcost;
+
+        printf ("after cost: %f, w: %f\n", cost(w),w);
+    }
 
     return 0;
 }
