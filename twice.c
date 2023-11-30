@@ -2,7 +2,6 @@
 #include <time.h>
 #include <stdlib.h>
 #include <math.h>
-#define EULER_NUMBER_L 2.7182818
 
 
 double Train[][3]={
