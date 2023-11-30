@@ -39,18 +39,18 @@ int main(){
 
     //double w = rand_float()*100;
 
-    double w =10.0;
-    double b = 5.0; 
+    double w =0.5;
+    double b = 0.1; 
 
-    double eps = 1e-1;    
-    double rate = 1e-1;
+    double eps = 1e-2;    
+    double rate = 1e-2;
 
     for (int i=0;i<100000;++i){
         double dw = (cost(w+eps,b) - cost(w,b))/eps;
         double db = (cost(w,b+eps) - cost(w,b))/eps;
         w-=rate*dw;
         b-=rate*db;
-        printf("cost: %f\n", cost(w,b));
+        
     }
 
     printf("cost: %f, w: %f, b: %f", cost(w,b),w,b);
