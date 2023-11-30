@@ -11,6 +11,7 @@ double Train[][2]={
     {4,8},
     {5,10},
     {6,12},
+    {7,14},
 };
 
 #define train_count (int)(sizeof(Train)/sizeof(Train[0]))
@@ -20,11 +21,11 @@ double rand_float(void){
 }
 
 
-double cost( double w){
+double cost( double w , double b){
     double res = 0.0f;
     for (int i = 0; i < train_count ; ++i){
         double x = Train[i][0];
-        double y = x*w;
+        double y = x*w + b;
 
         res += (y-Train[i][1])*(y-Train[i][1]);
     }
@@ -38,20 +39,21 @@ int main(){
 
     //double w = rand_float()*100;
 
-    double w =20;
+    double w =10.0;
+    double b = 5.0; 
 
     double eps = 1e-3;    
-    double rate = 1e-2;
+    double rate = 1e-3;
 
-    for (int i=0;i<20;++i){
-        double dcost = (cost(w+eps) - cost(w))/eps;
-
-        printf ("before cost: %f, w: %f\n", cost(w),w);
-
-        w-=rate*dcost;
-
-        printf ("after cost: %f, w: %f\n", cost(w),w);
+    for (int i=0;i<1000;++i){
+        double dw = (cost(w+eps,b) - cost(w,b))/eps;
+        double db = (cost(w,b+eps) - cost(w,b))/eps;
+        w-=rate*dw;
+        b-=rate*db;
+        printf("cost: %f\n", cost(w,b));
     }
+
+    printf("cost: %f, w: %f, b: %f", cost(w,b),w,b);
 
     return 0;
 }
