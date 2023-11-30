@@ -31,9 +31,6 @@ double cost( double w1 , double w2, double b){
     return res/train_count;
 }
 
-
-#define train_count (int)(sizeof(Train)/sizeof(Train[0]))
-
  void predict(int x, int y,double w1,double w2,double b){
     printf("%d | %d => %f\n",x,y,sigf( w1*x + w2*y + b));
  }
