@@ -86,12 +86,86 @@ void print_xor(Xor m){
 
 }
 
+Xor finite_difference(Xor m, double eps){
+
+    Xor g;
+    double c = cost(m);
+    double saved;
+
+    saved = m.or_w1;
+    m.or_w1 += eps;
+    g.or_w1 = (cost(m) -c)/eps;
+    m.or_w1 = saved;
+
+    saved = m.or_w2;
+    m.or_w2 += eps;
+    g.or_w2 = (cost(m) -c)/eps;
+    m.or_w2 = saved;
+
+    saved = m.or_b;
+    m.or_b += eps;
+    g.or_b = (cost(m) -c)/eps;
+    m.or_b = saved;
+
+    saved = m.nand_w1;
+    m.nand_w1 += eps;
+    g.nand_w1 = (cost(m) -c)/eps;
+    m.nand_w1 = saved;
+
+    saved = m.nand_w2;
+    m.nand_w2 += eps;
+    g.nand_w2 = (cost(m) -c)/eps;
+    m.nand_w2 = saved;
+
+    saved = m.nand_b;
+    m.nand_b += eps;
+    g.nand_b = (cost(m) -c)/eps;
+    m.nand_b = saved;
+
+    saved = m.and_w1;
+    m.and_w1 += eps;
+    g.and_w1 = (cost(m) -c)/eps;
+    m.and_w1 = saved;
+
+    saved = m.and_w2;
+    m.and_w2 += eps;
+    g.and_w2 = (cost(m) -c)/eps;
+    m.and_w2 = saved;
+
+    saved = m.and_b;
+    m.and_b += eps;
+    g.and_b = (cost(m) -c)/eps;
+    m.and_b = saved;
+
+    return g;
+}
+
+
+Xor train(Xor m, Xor g, double rate){
+    m.or_w1 -= rate*g.or_w1;
+    m.or_w2 -= rate*g.or_w2;
+    m.or_b -= rate*g.or_b;
+    m.nand_w1 -= rate*g.nand_w1;
+    m.nand_w2 -= rate*g.nand_w2;
+    m.nand_b -= rate*g.nand_b;
+    m.and_w1 -= rate*g.and_w1;
+    m.and_w2 -= rate*g.and_w2;
+    m.and_b -= rate*g.and_b;
+
+    return m;
+}
+
+
 int main(){
     srand(time(NULL));
 
     Xor m = rand_xor();
 
-    print_xor(m);
+    printf("cost: %f\n", cost(m));
+    printf("---------------------\n");
+    m=train(m,finite_difference(m,1e-3),1e-3);
+    printf("cost: %f\n", cost(m));
+
 
     return 0;
 }
