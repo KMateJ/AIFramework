@@ -163,8 +163,18 @@ int main(){
 
     printf("cost: %f\n", cost(m));
     printf("---------------------\n");
-    m=train(m,finite_difference(m,1e-3),1e-3);
+    for (int i=0;i<1000000;++i){
+        m=train(m,finite_difference(m,1e-2),1e-2);
+    }
     printf("cost: %f\n", cost(m));
+
+    for (int i=0; i< train_count; ++i){
+        int x= Train[i][0];
+        int y= Train[i][1];
+        printf("%d | %d => %f\n",x,y,forward(m,x,y));
+    }
+
+    
 
 
     return 0;
