@@ -4,14 +4,14 @@
 #include <math.h>
 
 double Train[][2]={
-    {0,0},
-    {1,2},
-    {2,4},
-    {3,6},
-    {4,8},
-    {5,10},
-    {6,12},
-    {7,14},
+    {0,1},
+    {1,3},
+    {2,5},
+    {3,7},
+    {4,9},
+    {5,11},
+    {6,13},
+    {7,15},
 };
 
 #define train_count (int)(sizeof(Train)/sizeof(Train[0]))
@@ -42,10 +42,10 @@ int main(){
     double w =0.5;
     double b = 0.1; 
 
-    double eps = 1e-2;    
-    double rate = 1e-2;
+    double eps = 1e-4;    
+    double rate = 1e-4;
 
-    for (int i=0;i<100000;++i){
+    for (int i=0;i<100000000;++i){
         double dw = (cost(w+eps,b) - cost(w,b))/eps;
         double db = (cost(w,b+eps) - cost(w,b))/eps;
         w-=rate*dw;
@@ -53,7 +53,14 @@ int main(){
         
     }
 
-    printf("cost: %f, w: %f, b: %f", cost(w,b),w,b);
+    printf("cost: %f, w: %f, b: %f\n", cost(w,b),w,b);
+    printf("tests-------------------\n");
+    printf("input: 2 -> %f\n", 2*w+b);
+    printf("input: 4 -> %f\n", 4*w+b);
+    printf("input: 10 -> %f\n", 10*w+b);
+    printf("input: 32 -> %f\n", 32*w+b);
+    printf("input: 24 -> %f\n", 24*w+b);
+    printf("input: -2 -> %f\n", -2*w+b);
 
     return 0;
 }
