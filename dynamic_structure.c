@@ -85,23 +85,43 @@ void mat_print(Mat m){
 
 
 
+double Train[][3]={
+    {0,0,0},
+    {1,0,1},
+    {0,1,1},
+    {1,1,0},
+};
+
+
 int main(){
 
     srand(time(NULL));
 
-    int r =5;
-    int c =5;
-    Mat m = mat_init(r,c);
-    Mat x = mat_init(r,c);
+    Mat w1 = mat_init(2,2);
+    Mat b1 = mat_init(1,2);
+    Mat w2 = mat_init(2,1);
+    Mat b2 = mat_init(1,1);
 
-    mat_fill(m,1);
-    mat_fill(x,1);
+    mat_rand(w1,0,1);
+    mat_rand(b1,0,1);
+    mat_rand(w2,0,1);
+    mat_rand(b2,0,1);
+/*
+    mat_print(w1);
+    printf("--------------\n");
 
-    mat_print(m);
-    mat_sum(m,x);
-    mat_print(m);
+    mat_print(b1);
+    printf("--------------\n");
 
-    free(m.es);
+    mat_print(w2);
+    printf("--------------\n");
+
+    mat_print(b2);
+    printf("--------------\n");
+*/
+
+    
+
 
     return 0;
 }
