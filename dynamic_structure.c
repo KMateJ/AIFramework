@@ -22,7 +22,7 @@ typedef struct {
 
 }Mat;
 
-Mat init_mat(size_t r, size_t c){
+Mat mat_init(size_t r, size_t c){
     Mat matrix ;
 
     matrix.rows = r,
@@ -91,8 +91,8 @@ int main(){
 
     int r =5;
     int c =5;
-    Mat m = init_mat(r,c);
-    Mat x = init_mat(r,c);
+    Mat m = mat_init(r,c);
+    Mat x = mat_init(r,c);
 
     mat_fill(m,1);
     mat_fill(x,1);
